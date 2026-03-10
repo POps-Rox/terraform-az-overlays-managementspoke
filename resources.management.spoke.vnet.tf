@@ -62,7 +62,7 @@ module "spoke_vnet" {
 #--------------------------------------------
 module "mod_spoke_vnet_ddos" {
   source              = "azure/avm-res-network-ddosprotectionplan/azurerm"
-  version             = "0.2.0"
+  version             = "0.3.0"
   count               = var.create_ddos_plan ? 1 : 0
   name                = local.ddos_plan_name
   resource_group_name = local.resource_group_name
