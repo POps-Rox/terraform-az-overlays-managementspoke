@@ -1,5 +1,5 @@
 locals {
-  tags = {    
+  tags = {
     Module  = "overlays-management-spoke"
     Toolkit = "Terraform"
     Example = "Management Spoke with CMK"

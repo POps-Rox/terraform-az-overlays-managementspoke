@@ -13,14 +13,14 @@ AUTHOR/S: jrspinella
 #--------------------------------------------------------------------------------------------------------
 
 module "default_snet" {
-  source   = "azure/avm-res-network-virtualnetwork/azurerm//modules/subnet"
-  version  = "0.4.2"
-  depends_on = [ module.spoke_vnet ]
-  for_each = var.spoke_subnets
+  source     = "azure/avm-res-network-virtualnetwork/azurerm//modules/subnet"
+  version    = "0.4.2"
+  depends_on = [module.spoke_vnet]
+  for_each   = var.spoke_subnets
 
   # Resource Name
-  name                 = var.custom_spoke_subnet_name != null ? "${var.custom_spoke_subnet_name}_${each.key}" : "${data.azurenoopsutils_resource_name.snet[each.key].result}"
-  
+  name = var.custom_spoke_subnet_name != null ? "${var.custom_spoke_subnet_name}_${each.key}" : "${data.azurenoopsutils_resource_name.snet[each.key].result}"
+
   # Virtual Networks
   virtual_network = {
     resource_id = module.spoke_vnet.resource_id

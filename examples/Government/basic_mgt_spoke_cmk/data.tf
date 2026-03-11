@@ -19,7 +19,7 @@ data "azurerm_log_analytics_workspace" "hub-logws" {
 data "azurerm_private_dns_zone" "blob" {
   name                = "privatelink.blob.core.usgovcloudapi.net"
   resource_group_name = "an16-usgva-dns-dev-rg"
-  
+
 }
 
 data "azurerm_key_vault" "kv" {

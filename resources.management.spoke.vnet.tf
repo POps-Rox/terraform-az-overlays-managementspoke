@@ -50,7 +50,7 @@ module "spoke_vnet" {
     kind = var.lock_level
   } : null
 
-   # telemtry
+  # telemtry
   enable_telemetry = var.disable_telemetry
 
   # Tags

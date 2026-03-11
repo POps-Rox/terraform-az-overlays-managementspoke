@@ -4,7 +4,7 @@
 module "mod_vnet_spoke" {
   #source  = "azurenoops/overlays-management-spoke/azurerm"
   #version = "~> x.x.x"
-   source = "../../.."
+  source = "../../.."
 
   # By default, this module will create a resource group, provide the name here
   # To use an existing resource group, specify the existing resource group name,
@@ -16,7 +16,7 @@ module "mod_vnet_spoke" {
   environment                 = var.environment
   workload_name               = var.id_name
 
- # (Required) Collect Hub Virtual Network Parameters
+  # (Required) Collect Hub Virtual Network Parameters
   # Hub network details
   existing_hub_firewall_private_ip_address = data.azurerm_firewall.hub-fw.ip_configuration[0].private_ip_address
 

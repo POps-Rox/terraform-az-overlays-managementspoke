@@ -22,5 +22,5 @@ resource "azurerm_role_assignment" "spoke_uai_role_assignment" {
   scope                = data.azurerm_key_vault.kv.id
   role_definition_name = "Key Vault Crypto Officer"
   principal_id         = azurerm_user_assigned_identity.spoke_user_assigned_identity.principal_id
-  
+
 }

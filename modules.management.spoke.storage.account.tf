@@ -5,9 +5,9 @@
 # spoke Logging Storage Account for Log Archiving
 #----------------------------------------------------------
 module "spoke_st" {
-  depends_on                    = [module.mod_scaffold_rg]
-  source                        = "azure/avm-res-storage-storageaccount/azurerm"
-  version                       = "0.2.7"
+  depends_on = [module.mod_scaffold_rg]
+  source     = "azure/avm-res-storage-storageaccount/azurerm"
+  version    = "0.2.7"
 
   // Globals
   resource_group_name = local.resource_group_name
@@ -50,9 +50,9 @@ module "spoke_st" {
   managed_identities = var.enable_customer_managed_keys ? {
     system_assigned            = true
     user_assigned_resource_ids = [var.user_assigned_identity_id]
-  } : {
-      system_assigned            = true
-      user_assigned_resource_ids = length(var.spoke_storage_user_assigned_resource_ids) > 0 ? var.spoke_storage_user_assigned_resource_ids : []
+    } : {
+    system_assigned            = true
+    user_assigned_resource_ids = length(var.spoke_storage_user_assigned_resource_ids) > 0 ? var.spoke_storage_user_assigned_resource_ids : []
   }
 
   # Customer Managed Key
@@ -94,7 +94,7 @@ module "spoke_st" {
     sendToLogAnalytics = {
       name                           = "sendToLogAnalytics_storage"
       workspace_resource_id          = var.existing_log_analytics_workspace_resource_id
-      log_analytics_destination_type = "Dedicated" 
+      log_analytics_destination_type = "Dedicated"
     }
   }
 

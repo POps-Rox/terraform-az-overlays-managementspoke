@@ -16,5 +16,5 @@ data "azurerm_log_analytics_workspace" "hub-logws" {
 }
 
 data "azurerm_resource_group" "dns" {
-  name     = "an1-eus-dns-dev-rg"
+  name = "an1-eus-dns-dev-rg"
 }
