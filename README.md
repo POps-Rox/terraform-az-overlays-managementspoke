@@ -31,7 +31,7 @@ provider "azurerm" {
 }
 
 module "overlays-management-spoke" {
-  source  = "azurenoops/overlays-management-spoke/azurerm"
+  source  = "POps-Rox/tf-az-overlays-management-spoke/azurerm"
   version = "2.0.0"
 
   location = "usgovvirginia"
@@ -92,7 +92,7 @@ More details are available in the [CONTRIBUTING.md](./CONTRIBUTING.md#pull-reque
 
 The following reference architecture shows how to implement a SCCA compliant hub-spoke topology in Azure. The Management spoke virtual networks connect with the hub and can be used to isolate management workloads. Management Spokes can exist in different subscriptions and represent different environments, such as Production and Non-production.
 
-![Architecture](https://github.com/azurenoops/terraform-azurerm-overlays-management-spoke/blob/main/docs/images/mission_enclave_spoke_simple.png)
+![Architecture](https://github.com/POps-Rox/tf-az-overlays-management-spoke/blob/main/docs/images/mission_enclave_spoke_simple.png)
 
 These types of resources are supported:
 
@@ -132,7 +132,7 @@ data "azurerm_log_analytics_workspace" "hub-logws" {
 }
 
 module "vnet-spoke" {
-  source  = "azurenoops/overlays-management-spoke/azurerm"
+  source  = "POps-Rox/tf-az-overlays-management-spoke/azurerm"
   version = "2.0.0"
 
   # By default, this module will create a resource group, provide the name here
@@ -221,7 +221,7 @@ This module supports enabling the service endpoint of your choosing under the vi
 
 ```hcl
 module "vnet-spoke" {
-  source  = "azurenoops/overlays-management-spoke/azurerm"
+  source  = "POps-Rox/tf-az-overlays-management-spoke/azurerm"
   version = "x.x.x"
 
   # .... omitted
@@ -249,7 +249,7 @@ This module supports enabling the service delegation of your choosing under the 
 
 ```hcl
 module "vnet-spoke" {
-  source  = "azurenoops/overlays-management-spoke/azurerm"
+  source  = "POps-Rox/tf-az-overlays-management-spoke/azurerm"
   version = "x.x.x"
 
   # .... omitted
@@ -285,7 +285,7 @@ This module Enable or Disable network policies for the private link endpoint on 
 
 ```hcl
 module "vnet-spoke" {
-  source  = "azurenoops/overlays-management-spoke/azurerm"
+  source  = "POps-Rox/tf-az-overlays-management-spoke/azurerm"
   version = "x.x.x"
 
   # .... omitted
@@ -315,7 +315,7 @@ This module Enable or Disable network policies for the private link service on t
 
 ```hcl
 module "vnet-spoke" {
-  source  = "azurenoops/overlays-management-spoke/azurerm"
+  source  = "POps-Rox/tf-az-overlays-management-spoke/azurerm"
   version = "x.x.x"
 
   # .... omitted
@@ -349,7 +349,7 @@ This module supports enabling the NSG Rules of your choosing under the virtual n
 
 ```hcl
 module "vnet-hub" {
-  source  = "azurenoops/overlays-management-hub/azurerm"
+  source  = "POps-Rox/tf-az-overlays-management-hub/azurerm"
   version = "x.x.x"
 
   # .... omitted
