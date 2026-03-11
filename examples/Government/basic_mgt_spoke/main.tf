@@ -2,7 +2,7 @@
 # Licensed under the MIT License.
 
 module "mod_vnet_spoke" {
-  #source  = "azurenoops/overlays-management-spoke/azurerm"
+  #source  = "github.com/POps-Rox/tf-az-overlays-managementspoke"
   #version = "~> x.x.x"
   source = "../../.."
 
@@ -55,7 +55,7 @@ module "mod_vnet_spoke" {
 
 # Create VNet Peering between Hub and Identity VNets
 module "mod_hub_to_id_vnet_peering" {
-  source  = "azurenoops/overlays-vnet-peering/azurerm"
+  source  = "github.com/POps-Rox/tf-az-overlays-vnetpeering"
   version = "~> 0.1.5-beta"
 
   depends_on = [module.mod_id_network, module.mod_hub_network]

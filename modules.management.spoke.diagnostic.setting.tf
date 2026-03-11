@@ -14,7 +14,7 @@ AUTHOR/S: jrspinella
 ##############################################
 
 module "mod_vnet_diagnostic_settings" {
-  source  = "azurenoops/overlays-diagnostic-settings/azurerm"
+  source  = "github.com/POps-Rox/tf-az-overlays-diagnosticsettings"
   version = "1.5.0"
 
   # Resource Group, location, VNet and Subnet details
@@ -29,7 +29,7 @@ module "mod_vnet_diagnostic_settings" {
 }
 
 module "mod_nsg_diagnostic_settings" {
-  source  = "azurenoops/overlays-diagnostic-settings/azurerm"
+  source  = "github.com/POps-Rox/tf-az-overlays-diagnosticsettings"
   version = "1.5.0"
 
   for_each = var.spoke_subnets
