@@ -14,7 +14,7 @@ AUTHOR/S: jrspinella
 ##############################################
 
 module "mod_vnet_diagnostic_settings" {
-  source  = "github.com/POps-Rox/tf-az-overlays-diagnosticsettings"
+  source = "github.com/POps-Rox/tf-az-overlays-diagnosticsettings"
 
   # Resource Group, location, VNet and Subnet details
   location           = var.location
@@ -28,7 +28,7 @@ module "mod_vnet_diagnostic_settings" {
 }
 
 module "mod_nsg_diagnostic_settings" {
-  source  = "github.com/POps-Rox/tf-az-overlays-diagnosticsettings"
+  source = "github.com/POps-Rox/tf-az-overlays-diagnosticsettings"
 
   for_each = var.spoke_subnets
 
