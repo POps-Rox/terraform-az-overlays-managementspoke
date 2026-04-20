@@ -19,7 +19,7 @@ module "default_snet" {
   for_each   = var.spoke_subnets
 
   # Resource Name
-  name = var.custom_spoke_subnet_name != null ? "${var.custom_spoke_subnet_name}_${each.key}" : "${data.azurenoopsutils_resource_name.snet[each.key].result}"
+  name = var.custom_spoke_subnet_name != null ? "${var.custom_spoke_subnet_name}_${each.key}" : "${data.popsrox_utils_resource_name.snet[each.key].result}"
 
   # Virtual Networks
   virtual_network = {

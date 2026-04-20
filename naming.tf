@@ -4,7 +4,7 @@
 #------------------------------------------------------------
 # Azure NoOps Naming - This should be used on all resource naming
 #------------------------------------------------------------
-data "azurenoopsutils_resource_name" "vnet" {
+data "popsrox_utils_resource_name" "vnet" {
   name          = var.workload_name
   resource_type = "azurerm_virtual_network"
   prefixes      = [var.org_name, var.use_location_short_name ? module.mod_azregions.location_short : module.mod_azregions.location_cli]
@@ -14,7 +14,7 @@ data "azurenoopsutils_resource_name" "vnet" {
   separator     = "-"
 }
 
-data "azurenoopsutils_resource_name" "snet" {
+data "popsrox_utils_resource_name" "snet" {
   for_each      = var.spoke_subnets
   name          = var.workload_name
   resource_type = "azurerm_subnet"
@@ -25,7 +25,7 @@ data "azurenoopsutils_resource_name" "snet" {
   separator     = "-"
 }
 
-data "azurenoopsutils_resource_name" "nsg" {
+data "popsrox_utils_resource_name" "nsg" {
   for_each      = var.spoke_subnets
   name          = var.workload_name
   resource_type = "azurerm_network_security_group"
@@ -36,7 +36,7 @@ data "azurenoopsutils_resource_name" "nsg" {
   separator     = "-"
 }
 
-data "azurenoopsutils_resource_name" "rt" {
+data "popsrox_utils_resource_name" "rt" {
   name          = var.workload_name
   resource_type = "azurerm_route_table"
   prefixes      = [var.org_name, var.use_location_short_name ? module.mod_azregions.location_short : module.mod_azregions.location_cli]
@@ -46,7 +46,7 @@ data "azurenoopsutils_resource_name" "rt" {
   separator     = "-"
 }
 
-data "azurenoopsutils_resource_name" "st" {
+data "popsrox_utils_resource_name" "st" {
   name          = random_id.uniqueString.hex
   resource_type = "azurerm_storage_account"
   prefixes      = [var.org_name, var.use_location_short_name ? module.mod_azregions.location_short : module.mod_azregions.location_cli]
@@ -54,7 +54,7 @@ data "azurenoopsutils_resource_name" "st" {
   use_slug      = var.use_naming
 }
 
-data "azurenoopsutils_resource_name" "ddos" {
+data "popsrox_utils_resource_name" "ddos" {
   name          = var.workload_name
   resource_type = "azurerm_network_ddos_protection_plan"
   prefixes      = [var.org_name, var.use_location_short_name ? module.mod_azregions.location_short : module.mod_azregions.location_cli]
@@ -64,7 +64,7 @@ data "azurenoopsutils_resource_name" "ddos" {
   separator     = "-"
 }
 
-data "azurenoopsutils_resource_name" "pe" {
+data "popsrox_utils_resource_name" "pe" {
   name          = var.workload_name
   resource_type = "azurerm_private_endpoint"
   prefixes      = [var.org_name, var.use_location_short_name ? module.mod_azregions.location_short : module.mod_azregions.location_cli]
@@ -74,7 +74,7 @@ data "azurenoopsutils_resource_name" "pe" {
   separator     = "-"
 }
 
-data "azurenoopsutils_resource_name" "psc" {
+data "popsrox_utils_resource_name" "psc" {
   name          = var.workload_name
   resource_type = "azurerm_private_service_connection"
   prefixes      = [var.org_name, var.use_location_short_name ? module.mod_azregions.location_short : module.mod_azregions.location_cli]
@@ -84,7 +84,7 @@ data "azurenoopsutils_resource_name" "psc" {
   separator     = "-"
 }
 
-data "azurenoopsutils_resource_name" "nic" {
+data "popsrox_utils_resource_name" "nic" {
   name          = var.workload_name
   resource_type = "azurerm_network_interface"
   prefixes      = [var.org_name, var.use_location_short_name ? module.mod_azregions.location_short : module.mod_azregions.location_cli]
