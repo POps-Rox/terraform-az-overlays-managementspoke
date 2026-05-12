@@ -3,7 +3,7 @@
 
 module "nsg" {
   source  = "azure/avm-res-network-networksecuritygroup/azurerm"
-  version = "0.2.0"
+  version = "0.5.1"
 
   for_each = var.spoke_subnets
 

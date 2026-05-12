@@ -33,7 +33,7 @@ output "virtual_network_id" {
 
 output "virtual_network_address_space" {
   description = "List of address spaces that are used the virtual network."
-  value       = module.spoke_vnet.resource.body.properties.addressSpace.addressPrefixes
+  value       = module.spoke_vnet.address_spaces
 }
 
 output "subnet_ids" {
@@ -54,7 +54,7 @@ output "subnet_names" {
 
 output "subnet_address_prefixes" {
   description = "List of address prefix for subnets"
-  value       = flatten(concat([for s in module.default_snet : s.resource.body.properties.addressPrefixes]))
+  value       = flatten([for s in module.default_snet : s.address_prefixes])
 }
 
 # Network Security group ids
@@ -77,7 +77,7 @@ output "network_security_group_names" {
 # DDoS Protection Plan
 output "ddos_protection_plan_id" {
   description = "Ddos protection plan details"
-  value       = var.create_ddos_plan ? module.mod_spoke_vnet_ddos[0].resource.id : null
+  value       = var.create_ddos_plan ? module.mod_spoke_vnet_ddos[0].resource_id : null
 }
 
 output "network_watcher_id" {

@@ -24,7 +24,7 @@ module "mod_vnet_diagnostic_settings" {
   workload_name      = format("%s-vnet", var.workload_name)
 
   resource_id           = module.spoke_vnet.resource_id
-  logs_destinations_ids = [var.existing_log_analytics_workspace_resource_id, module.spoke_st.resource.id]
+  logs_destinations_ids = [var.existing_log_analytics_workspace_resource_id, module.spoke_st.resource_id]
 }
 
 module "mod_nsg_diagnostic_settings" {
@@ -41,6 +41,6 @@ module "mod_nsg_diagnostic_settings" {
 
 
   resource_id           = module.nsg[each.key].resource_id
-  logs_destinations_ids = [var.existing_log_analytics_workspace_resource_id, module.spoke_st.resource.id]
+  logs_destinations_ids = [var.existing_log_analytics_workspace_resource_id, module.spoke_st.resource_id]
 }
 

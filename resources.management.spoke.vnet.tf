@@ -15,17 +15,17 @@ AUTHOR/S: jrspinella
 #-------------------------------------
 module "spoke_vnet" {
   source  = "azure/avm-res-network-virtualnetwork/azurerm"
-  version = "0.4.2"
+  version = "0.17.1"
 
-  # Resource Group
-  name                = local.spoke_vnet_name
-  resource_group_name = local.resource_group_name
-  location            = local.location
+  # Resource Group (parent_id replaces resource_group_name in 0.17.x)
+  name      = local.spoke_vnet_name
+  parent_id = local.resource_group_id
+  location  = local.location
 
   # Virtual Network DNS Servers
-  dns_servers = {
+  dns_servers = length(var.dns_servers) > 0 ? {
     dns_servers = var.dns_servers
-  }
+  } : null
 
   # Virtual Network Address Space
   address_space = var.virtual_network_address_space
@@ -33,7 +33,7 @@ module "spoke_vnet" {
   # Ddos protection plan - Default is "false"
   ddos_protection_plan = var.create_ddos_plan ? {
     enable = true
-    id     = module.mod_spoke_vnet_ddos[0].resource.id
+    id     = module.mod_spoke_vnet_ddos[0].resource_id
   } : null
 
   role_assignments = {
@@ -62,7 +62,7 @@ module "spoke_vnet" {
 #--------------------------------------------
 module "mod_spoke_vnet_ddos" {
   source              = "azure/avm-res-network-ddosprotectionplan/azurerm"
-  version             = "0.2.0"
+  version             = "0.3.0"
   count               = var.create_ddos_plan ? 1 : 0
   name                = local.ddos_plan_name
   resource_group_name = local.resource_group_name
