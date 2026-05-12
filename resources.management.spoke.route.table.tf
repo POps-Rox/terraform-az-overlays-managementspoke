@@ -11,9 +11,9 @@ AUTHOR/S: jrspinella
 */
 
 resource "azurerm_route_table" "routetable" {
-  name                          = local.spoke_rt_name
-  resource_group_name           = local.resource_group_name
-  location                      = local.location
+  name                = local.spoke_rt_name
+  resource_group_name = local.resource_group_name
+  location            = local.location
   # azurerm 4.x renamed `disable_bgp_route_propagation` to `bgp_route_propagation_enabled`
   # and inverted its semantics. The module variable is kept (preserves public API);
   # we invert the value here. A prior partial rename in this file left the value
