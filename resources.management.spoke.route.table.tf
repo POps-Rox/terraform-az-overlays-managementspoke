@@ -14,7 +14,11 @@ resource "azurerm_route_table" "routetable" {
   name                          = local.spoke_rt_name
   resource_group_name           = local.resource_group_name
   location                      = local.location
-  bgp_route_propagation_enabled = var.disable_bgp_route_propagation
+  # azurerm 4.x renamed `disable_bgp_route_propagation` to `bgp_route_propagation_enabled`
+  # and inverted its semantics. The module variable is kept (preserves public API);
+  # we invert the value here. A prior partial rename in this file left the value
+  # un-inverted — fixed in this commit.
+  bgp_route_propagation_enabled = !var.disable_bgp_route_propagation
   tags                          = merge({ "ResourceName" = "route-network-outbound" }, local.default_tags, var.add_tags, )
 }
 
