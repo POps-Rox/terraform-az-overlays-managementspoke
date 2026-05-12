@@ -1,5 +1,30 @@
 # v1.0.0 - date
 
+## [2.1.0] - 2026-05-12
+
+### Changed
+
+- BREAKING: Bumped AVM module dependencies to azurerm 4.x-compatible versions:
+  - `avm-res-network-virtualnetwork`: 0.4.2 → 0.17.1
+  - `avm-res-network-ddosprotectionplan`: 0.2.0 → 0.3.0
+  - `avm-res-network-networksecuritygroup`: 0.2.0 → 0.5.1
+  - `avm-res-storage-storageaccount`: 0.2.7 → 0.7.0
+- BREAKING: Refactored module inputs/outputs to match the new AVM schemas:
+  - `avm-res-network-virtualnetwork` now requires `parent_id` (resource group ID) in place of `resource_group_name`.
+  - `avm-res-network-virtualnetwork//modules/subnet` now takes `parent_id` (vnet ID) instead of `virtual_network = { resource_id = ... }`, and `service_endpoints` was renamed to `service_endpoints_with_location`.
+  - `avm-res-storage-storageaccount` now requires `parent_id` (resource group ID); the `blob_properties` block was removed in the azapi rewrite — container/blob delete retention is no longer applied by the module.
+  - Internal references like `module.spoke_vnet.resource.body.properties.addressSpace.addressPrefixes` switched to the new `address_spaces` / `address_prefixes` outputs.
+- Removed the `azapi ~> 1.13` pin from `versions.tf`; the module now uses the fleet target `azapi ~> 2.0`.
+
+### Fixed
+
+- `terraform init` no longer fails with a provider constraint conflict between the root `azapi ~> 2.0` pin and the transitive AVM `azapi < 2.0` pin (root cause of issue #26).
+- Two example output bindings in `examples/Commerical/basic_mgt_spoke` and `examples/Government/basic_mgt_spoke` (`storage_account_id` / `storage_account_name`) now reference the actual root output names (`spoke_storage_account_id` / `spoke_storage_account_name`).
+
+### Known gaps
+
+- `examples/Government/basic_mgt_spoke/main.tf` has a pre-existing `depends_on = [module.mod_id_network, module.mod_hub_network]` on a legacy provider-bearing module from `terraform-az-overlays-vnetpeering`. The referenced modules do not exist in this example and the legacy module rejects `depends_on`. Out of scope for this AVM bump; tracked separately.
+
 ## [v2.0.0] - 2026-05-11
 
 ### Breaking changes

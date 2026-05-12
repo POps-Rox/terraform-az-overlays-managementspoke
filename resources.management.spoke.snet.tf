@@ -14,21 +14,25 @@ AUTHOR/S: jrspinella
 
 module "default_snet" {
   source     = "azure/avm-res-network-virtualnetwork/azurerm//modules/subnet"
-  version    = "0.4.2"
+  version    = "0.17.1"
   depends_on = [module.spoke_vnet]
   for_each   = var.spoke_subnets
 
   # Resource Name
   name = var.custom_spoke_subnet_name != null ? "${var.custom_spoke_subnet_name}_${each.key}" : "${data.popsrox_resource_name.snet[each.key].result}"
 
-  # Virtual Networks
-  virtual_network = {
-    resource_id = module.spoke_vnet.resource_id
-  }
+  # Virtual Network (parent_id replaces the virtual_network object in 0.17.x)
+  parent_id = module.spoke_vnet.resource_id
 
   # Subnet Information
-  address_prefixes  = each.value.address_prefixes
-  service_endpoints = lookup(each.value, "service_endpoints", [])
+  address_prefixes = each.value.address_prefixes
+
+  # service_endpoints is now `service_endpoints_with_location` (list of objects).
+  # Convert the simple list-of-services input to the new shape; pass null when empty.
+  service_endpoints_with_location = length(lookup(each.value, "service_endpoints", [])) > 0 ? [
+    for svc in each.value.service_endpoints : { service = svc }
+  ] : null
+
   # Applicable to the subnets which used for Private link endpoints or services
   private_endpoint_network_policies             = lookup(each.value, "private_endpoint_network_policies_enabled", null)
   private_link_service_network_policies_enabled = lookup(each.value, "private_link_service_network_policies_enabled", null)

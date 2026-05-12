@@ -4,6 +4,7 @@ locals {
   name_suffix = lower(var.name_suffix)
 
   resource_group_name = element(coalescelist(data.azurerm_resource_group.rgrp.*.name, module.mod_scaffold_rg.*.resource_group_name, [""]), 0)
+  resource_group_id   = element(coalescelist(data.azurerm_resource_group.rgrp.*.id, module.mod_scaffold_rg.*.resource_group_id, [""]), 0)
   location            = element(coalescelist(data.azurerm_resource_group.rgrp.*.location, module.mod_scaffold_rg.*.resource_group_location, [""]), 0)
   spoke_vnet_name     = coalesce(var.custom_spoke_virtual_network_name, data.popsrox_resource_name.vnet.result)
   spoke_rt_name       = coalesce(var.custom_spoke_route_table_name, "${data.popsrox_resource_name.rt.result}")

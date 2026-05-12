@@ -7,12 +7,12 @@
 module "spoke_st" {
   depends_on = [module.mod_scaffold_rg]
   source     = "azure/avm-res-storage-storageaccount/azurerm"
-  version    = "0.2.7"
+  version    = "0.7.0"
 
-  // Globals
-  resource_group_name = local.resource_group_name
-  name                = local.spoke_sa_name
-  location            = local.location
+  // Globals (parent_id replaces resource_group_name in 0.7.x)
+  parent_id = local.resource_group_id
+  name      = local.spoke_sa_name
+  location  = local.location
 
   // Account 
   account_kind              = var.spoke_storage_account_kind
@@ -76,18 +76,14 @@ module "spoke_st" {
     }
   }
 
-  # Blob Properties
+  # Containers
   containers = var.spoke_storage_containers
 
-  # Blob Properties
-  blob_properties = {
-    container_delete_retention_policy = {
-      days = 30
-    }
-    delete_retention_policy = {
-      days = 30
-    }
-  }
+  # NOTE: `blob_properties` was removed in storage AVM 0.7.0 (azapi rewrite).
+  # Blob service-level retention/versioning/CORS settings must now be configured
+  # directly via `Microsoft.Storage/storageAccounts/blobServices@2024-01-01`
+  # using azapi if required. The previous container/blob delete retention of
+  # 30 days is no longer applied by this module.
 
   # Diagnostic Settings
   diagnostic_settings_blob = {
