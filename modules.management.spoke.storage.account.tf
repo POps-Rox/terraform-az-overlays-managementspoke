@@ -7,7 +7,7 @@
 module "spoke_st" {
   depends_on = [module.mod_scaffold_rg]
   source     = "azure/avm-res-storage-storageaccount/azurerm"
-  version    = "0.7.0"
+  version    = "0.7.2"
 
   // Globals (parent_id replaces resource_group_name in 0.7.x)
   parent_id = local.resource_group_id
