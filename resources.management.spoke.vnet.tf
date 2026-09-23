@@ -14,8 +14,7 @@ AUTHOR/S: jrspinella
 # VNET Creation - Default is "true"
 #-------------------------------------
 module "spoke_vnet" {
-  source  = "azure/avm-res-network-virtualnetwork/azurerm"
-  version = "0.17.1"
+  source = "./modules/virtualnetwork-azurerm5"
 
   # Resource Group (parent_id replaces resource_group_name in 0.17.x)
   name      = local.spoke_vnet_name
@@ -61,8 +60,7 @@ module "spoke_vnet" {
 # Ddos protection plan - Default is "false"
 #--------------------------------------------
 module "mod_spoke_vnet_ddos" {
-  source              = "azure/avm-res-network-ddosprotectionplan/azurerm"
-  version             = "0.3.0"
+  source              = "./modules/ddosprotectionplan-azurerm5"
   count               = var.create_ddos_plan ? 1 : 0
   name                = local.ddos_plan_name
   resource_group_name = local.resource_group_name

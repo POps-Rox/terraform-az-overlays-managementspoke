@@ -25,7 +25,7 @@ module "mod_vnet_spoke" {
   existing_log_analytics_workspace_id          = data.azurerm_log_analytics_workspace.hub-logws.workspace_id
 
   # DNS Resource Group
-  existing_private_dns_zone_blob_id = data.azurerm_resource_group.dns.id
+  existing_private_dns_zone_blob_id = [data.azurerm_resource_group.dns.id]
 
   # (Required) To enable Azure Monitoring and flow logs
   # To enable traffic analytics, set `enable_traffic_analytics = true` in the module.
@@ -57,7 +57,6 @@ module "mod_vnet_spoke" {
 module "mod_hub_to_id_vnet_peering" {
   source = "github.com/POps-Rox/terraform-az-overlays-vnetpeering"
 
-  depends_on = [module.mod_id_network, module.mod_hub_network]
 
   location           = var.default_location
   deploy_environment = var.deploy_environment
@@ -73,6 +72,6 @@ module "mod_hub_to_id_vnet_peering" {
   alias_subscription_id                 = data.azurerm_client_config.current.subscription_id
   vnet_src_name                         = module.mod_vnet_spoke.virtual_network_name
   vnet_src_id                           = module.mod_vnet_spoke.virtual_network_id
-  different_subscription_dest_vnet_name = data.azurerm_virtual_network.hub-vnet.virtual_network_name
+  different_subscription_dest_vnet_name = data.azurerm_virtual_network.hub-vnet.name
   different_subscription_dest_vnet_id   = data.azurerm_virtual_network.hub-vnet.id
 }
