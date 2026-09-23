@@ -105,4 +105,3 @@ module "spoke_st" {
 /* data "azurerm_monitor_diagnostic_categories" "main" {
   resource_id = module.spoke_st.resource.id
 } */
-

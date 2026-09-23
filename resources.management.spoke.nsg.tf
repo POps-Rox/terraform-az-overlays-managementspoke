@@ -2,8 +2,7 @@
 # Licensed under the MIT License.
 
 module "nsg" {
-  source  = "azure/avm-res-network-networksecuritygroup/azurerm"
-  version = "0.5.1"
+  source = "./modules/networksecuritygroup-azurerm5"
 
   for_each = var.spoke_subnets
 
